@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050907">
+<meta name="description" content="VOIDRYN — Telegram bot network, communities and contact links.">
+<title>VOIDRYN // TELEGRAM SYSTEM</title>
+<style>
+:root{--bg:#050907;--panel:#0a120e;--panel2:#0d1912;--green:#65ff91;--green2:#24c968;--muted:#9bb3a2;--line:rgba(101,255,145,.19);--white:#eaffef}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 50% -15%,rgba(36,201,104,.13),transparent 42%),var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(rgba(101,255,145,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(101,255,145,.08) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 75%)}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1100px,92%);margin:auto;position:relative}
+header{position:sticky;top:0;z-index:20;background:rgba(5,9,7,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:950;letter-spacing:.16em;color:var(--green);font-size:1.08rem;text-shadow:0 0 20px #24c96855}
+.navlinks{display:flex;gap:20px;align-items:center;font-size:.76rem;color:var(--muted);letter-spacing:.09em}
+.navlinks a:hover{color:var(--green)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--green);border-radius:8px;padding:8px 11px;font-size:1rem}
+.status{font-size:.68rem;letter-spacing:.16em;color:var(--green);display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.hero{padding:100px 0 80px;text-align:center}
+.eyebrow{color:var(--green);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
+h1{font-size:clamp(3.4rem,12vw,7.5rem);line-height:.95;letter-spacing:.08em;margin:22px 0 15px;font-weight:1000;text-shadow:0 0 36px #24c96840}
+.hero p{color:var(--muted);max-width:580px;margin:0 auto 28px;line-height:1.8}
+.handle{color:var(--green);letter-spacing:.12em;font-size:.9rem}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:1px solid var(--green);border-radius:7px;color:#041008;background:var(--green);font-size:.76rem;font-weight:850;letter-spacing:.1em;transition:.2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 0 24px #24c96855}
+.btn.ghost{background:transparent;color:var(--green)}
+.section{padding:55px 0}
+.section-head{margin-bottom:25px}
+.kicker{color:var(--green);font-size:.68rem;letter-spacing:.2em}
+h2{font-size:clamp(1.7rem,5vw,2.5rem);margin:8px 0 0;letter-spacing:.04em}
+.sub{color:var(--muted);font-size:.9rem;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:12px;padding:20px;transition:.2s;min-width:0}
+.card:hover{border-color:#65ff9177;transform:translateY(-3px)}
+.card .num{color:var(--green);font-size:.68rem;letter-spacing:.16em}
+.card h3{font-size:1rem;margin:12px 0 8px;overflow-wrap:anywhere}
+.card p{font-size:.82rem;color:var(--muted);line-height:1.6;overflow-wrap:anywhere}
+.card .link{display:inline-block;margin-top:10px;color:var(--green);font-size:.74rem;font-weight:800;letter-spacing:.08em}
+.botgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bot{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:9px;min-width:0}
+.bot-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.bot-tab{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:12px 15px;border-radius:8px;font-size:.7rem;font-weight:850;letter-spacing:.09em;transition:.2s}
+.bot-tab:hover,.bot-tab.active{border-color:var(--green);color:var(--green);box-shadow:0 0 18px #24c96820}
+.upcoming{min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed #65ff9155;background:linear-gradient(145deg,#0b170f,#070d09);border-radius:12px;padding:28px}
+.upcoming[hidden]{display:none}
+.upcoming-mark{font-size:.7rem;font-weight:900;letter-spacing:.2em;color:var(--green);border:1px solid var(--line);padding:8px 13px;border-radius:99px}
+.upcoming h3{margin:18px 0 5px;letter-spacing:.14em}
+.upcoming p{margin:0;color:var(--muted);font-size:.85rem}
+.botname{font-size:.8rem;font-weight:800;overflow-wrap:anywhere}
+.bot small{display:block;color:var(--muted);font-size:.65rem;margin-top:5px}
+.open{color:var(--green);font-size:.7rem;font-weight:900;white-space:nowrap}
+.aboutbox{border:1px solid var(--line);border-radius:14px;padding:28px;background:linear-gradient(120deg,#0c1b12,#08100b)}
+.aboutbox p{color:var(--muted);line-height:1.9;margin-bottom:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pill{border:1px solid var(--line);color:var(--green);padding:7px 10px;border-radius:99px;font-size:.67rem;letter-spacing:.08em}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;margin-top:35px;color:var(--muted);font-size:.75rem}
+.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+footer strong{color:var(--green);letter-spacing:.12em}
+@media(max-width:760px){.navlinks{display:none;position:absolute;top:69px;left:0;right:0;background:#07100a;padding:18px 4%;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.navlinks.show{display:flex}.menu{display:block}.status{font-size:.58rem}.hero{padding:75px 0 60px}.grid,.botgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.grid,.botgrid{grid-template-columns:1fr}.hero p{font-size:.9rem}.card{padding:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home">V // VOIDRYN</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#groups">GROUPS</a><a href="#bots">BOTS</a><a href="#contact">CONTACT</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:13px"><span class="status"><i class="dot"></i> ONLINE</span><button class="menu" id="menu" aria-label="Toggle navigation">☰</button></div>
+  </div>
+</header>
+<main>
+<section class="hero wrap" id="home">
+  <div class="eyebrow">// TELEGRAM NETWORK & BOT DIRECTORY</div>
+  <h1>VOIDRYN</h1>
+  <div class="handle">@ll_VOIDRYN_DFS_ll</div>
+  <p>A central hub for the VOIDRYN community, Telegram groups and bot network. Explore the links below and connect with the official channels.</p>
+  <div class="actions">
+    <a class="btn" href="https://t.me/urfathervoidryn" target="_blank" rel="noopener">TELEGRAM CHANNEL ↗</a>
+    <a class="btn ghost" href="#bots">EXPLORE BOTS ↓</a>
+  </div>
+</section>
+<section class="section wrap" id="about">
+  <div class="section-head"><div class="kicker">// 01 — OPERATOR PROFILE</div><h2>ABOUT VOIDRYN</h2></div>
+  <div class="aboutbox">
+    <div class="eyebrow">PERSONAL INTRODUCTION</div>
+    <h2 style="font-size:1.55rem">#𝐃ᴏɴᴛ_𝐖ᴏʀʀʏ_𝐖ᴇ_𝐀ʀᴇ_𝐓ʜᴇ_𝐒ᴛʀᴏɴɢᴇsᴛ_</h2>
+    <h2 style="font-size:1.35rem;color:var(--green)">#𝐃𝛆𝖋𝛂υℓ𝛕𝛆ɤ𝛅_𝛅𝛂ɤ𝛋𝛂ɤ❤</h2>
+    <p style="margin-top:18px">REAL NAME: AYUSH<br>Bas zyada nahi bataunga 🤧</p>
+    <div class="pills"><span class="pill">TELEGRAM COMMUNITY</span><span class="pill">BOT NETWORK</span><span class="pill">VOIDRYN</span></div>
+  </div>
+</section>
+<section class="section wrap" id="groups">
+  <div class="section-head"><div class="kicker">// 02 — COMMUNITY ACCESS</div><h2>OUR COMMUNITIES</h2><p class="sub">Join the community or follow the official channel.</p></div>
+  <div class="grid">
+    <article class="card"><div class="num">COMMUNITY / 01</div><h3>SUDO GROUP</h3><p>Join the main VOIDRYN group chat.</p><a class="link" href="https://t.me/+-5-qpirqyXcxNjA1" target="_blank" rel="noopener">JOIN GROUP ↗</a></article>
+    <article class="card"><div class="num">COMMUNITY / 02</div><h3>I ALSO SUPPORT</h3><p>Opens the group link you provided.</p><a class="link" href="https://t.me/+ItwcDQB-nCNmMWI9" target="_blank" rel="noopener">JOIN GROUP ↗</a></article>
+    <article class="card"><div class="num">BROADCAST / 03</div><h3>OFFICIAL CHANNEL</h3><p>Updates and announcements from VOIDRYN.</p><a class="link" href="https://t.me/urfathervoidryn" target="_blank" rel="noopener">OPEN CHANNEL ↗</a></article>
+    <article class="card"><div class="num">SUPPORT / 04</div><h3>SUPPORT GROUP</h3><p>For support and community queries.</p><a class="link" href="https://t.me/+MSnXB92lzR42ZTE1" target="_blank" rel="noopener">GET SUPPORT ↗</a></article>
+  </div>
+</section>
+<section class="section wrap" id="bots">
+  <div class="section-head"><div class="kicker">// 03 — AUTOMATION DIRECTORY</div><h2>BOTS MATRIX</h2><p class="sub">Select a bot to open it on Telegram.</p></div>
+  <div class="bot-tabs" role="tablist" aria-label="Bot categories">
+    <button class="bot-tab active" type="button" data-tab="spam" aria-selected="true">SESSION SPAM BOTS</button>
+    <button class="bot-tab" type="button" data-tab="userbot" aria-selected="false">USERBOT</button>
+    <button class="bot-tab" type="button" data-tab="music" aria-selected="false">MUSIC BOT</button>
+  </div>
+  <div class="bot-panel" id="spam-panel">
+    <div class="botgrid" id="botgrid"></div>
+  </div>
+  <div class="bot-panel upcoming" id="userbot-panel" hidden>
+    <div class="upcoming-mark">COMING SOON</div>
+    <h3>USERBOT</h3>
+    <p>VOIDRYN USERBOT details will be added here soon.</p>
+  </div>
+  <div class="bot-panel upcoming" id="music-panel" hidden>
+    <div class="upcoming-mark">COMING SOON</div>
+    <h3>MUSIC BOT</h3>
+    <p>VOIDRYN MUSIC BOT details will be added here soon.</p>
+  </div>
+</section>
+<section class="section wrap" id="contact">
+  <div class="section-head"><div class="kicker">// 04 — CONNECT</div><h2>CONTACT & SOCIALS</h2><p class="sub">Find VOIDRYN across these platforms.</p></div>
+  <div class="grid">
+    <article class="card"><div class="num">TELEGRAM</div><h3>PERSONAL CONTACT</h3><p>@ll_VOIDRYN_DFS_ll</p><a class="link" href="https://t.me/ll_VOIDRYN_DFS_ll" target="_blank" rel="noopener">MESSAGE ↗</a></article>
+    <article class="card"><div class="num">INSTAGRAM</div><h3>INSTAGRAM PROFILE</h3><p>@voidryn85</p><a class="link" href="https://www.instagram.com/voidryn85" target="_blank" rel="noopener">OPEN INSTAGRAM ↗</a></article>
+    <article class="card"><div class="num">TELEGRAM CHANNEL</div><h3>OFFICIAL UPDATES</h3><p>Follow the VOIDRYN channel.</p><a class="link" href="https://t.me/urfathervoidryn" target="_blank" rel="noopener">FOLLOW ↗</a></article>
+  </div>
+</section>
+</main>
+<footer><div class="wrap foot"><span><strong>VOIDRYN</strong> // TELEGRAM SYSTEM</span><span>© <span id="year"></span> VOIDRYN. ALL RIGHTS RESERVED.</span><span>BUILT FOR THE COMMUNITY.</span></div></footer>
+<script>
+const bots = Array.from({length:12},(_,i)=>i+1);
+const botgrid=document.getElementById('botgrid');
+bots.forEach(n=>{
+ const username=`VOIDRYNIIIROBOT_${n}BOT`;
+ const card=document.createElement('a');
+ card.className='bot'; card.href=`https://t.me/${username}`; card.target='_blank'; card.rel='noopener';
+ card.innerHTML=`<span><span class="botname">${username}</span><small>TELEGRAM BOT // #${String(n).padStart(2,'0')}</small></span><span class="open">OPEN ↗</span>`;
+ botgrid.appendChild(card);
+});
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.bot-tab').forEach(button=>{
+ button.addEventListener('click',()=>{
+   document.querySelectorAll('.bot-tab').forEach(tab=>{
+     tab.classList.toggle('active',tab===button);
+     tab.setAttribute('aria-selected',tab===button?'true':'false');
+   });
+   ['spam','userbot','music'].forEach(key=>{
+     document.getElementById(`${key}-panel`).hidden=key!==button.dataset.tab;
+   });
+ });
+});
+document.getElementById('menu').addEventListener('click',()=>document.getElementById('navlinks').classList.toggle('show'));
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('show')));
+</script>
+</body>
+</html>
